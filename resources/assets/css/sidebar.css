@@ -1,0 +1,242 @@
+/*!
+ * Start Bootstrap - Simple Sidebar (http://startbootstrap.com/)
+ * Copyright 2013-2016 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
+ */
+
+ body {
+    overflow-x: hidden;
+ }
+
+/* Toggle Styles */
+
+#wrapper {
+    padding-left: 0;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+#wrapper.toggled {
+    padding-left: 250px;
+}
+
+#sidebar-wrapper {
+    z-index: 1000;
+    position: fixed;
+    left: 250px;
+    width: 0;
+    height: 100%;
+    margin-left: -250px;
+    overflow-y: auto;
+    background: #592191;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+    width: 250px;
+}
+
+#page-content-wrapper {
+    width: 100%;
+    position: absolute;
+    padding: 15px;
+}
+
+#wrapper.toggled #page-content-wrapper {
+    position: absolute;
+    margin-right: -250px;
+}
+
+/* Sidebar Styles */
+
+.sidebar-nav {
+    position: absolute;
+    top: 0;
+    width: 250px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.sidebar-nav li {
+    text-indent: 20px;
+    line-height: 40px;
+}
+
+.sidebar-nav li a {
+    display: block;
+    text-decoration: none;
+    color: #fff;
+    font-size:14px;
+    font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+    padding:5px;
+}
+
+.sidebar-brand a {
+    font-size:18px !important;
+}
+
+
+.sidebar-nav li a:hover {
+    text-decoration: none;
+    color: #fff;
+    background: rgba(255,255,255,0.2);
+}
+
+.sidebar-nav .active a {
+    text-decoration: none;
+    color: #fff;
+    background: rgba(255,255,255,0.2);
+}
+
+.sidebar-nav li a:active,
+.sidebar-nav li a:focus {
+    text-decoration: none;
+}
+
+.sidebar-nav > .sidebar-brand {
+    height: 65px;
+    font-size: 18px;
+    line-height: 60px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.sidebar-nav > .sidebar-brand a {
+    color: #fff;
+}
+
+.sidebar-nav > .sidebar-brand a:hover {
+    color: #fff;
+    background: none;
+}
+
+@media(min-width:768px) {
+    #wrapper {
+        padding-left: 250px;
+    }
+
+    #wrapper.toggled {
+        padding-left: 0;
+    }
+
+    #sidebar-wrapper {
+        width: 250px;
+    }
+
+    #wrapper.toggled #sidebar-wrapper {
+        width: 0;
+    }
+
+    #page-content-wrapper {
+        padding: 20px;
+        position: relative;
+    }
+
+    #wrapper.toggled #page-content-wrapper {
+        position: relative;
+        margin-right: 0;
+    }
+}
+.recent ul li, .accounts ul li, .txs ul li{
+    display:block;
+    padding:15px;
+    border:solid 1px #aaa;
+    font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+    box-shadow:2px 2px 3px #888;
+    margin-bottom:10px;
+}
+.label-input{
+    width:100%;
+    padding: 5px;
+    border: none;
+    border-bottom: solid 1px #ccc;
+    color: #777;
+    margin-bottom: 10px;
+    background: transparent;
+}
+.label-input:focus{
+    border-bottom: solid 2px #b382e3;
+    outline: none;
+}
+.cstm-pencil{
+    margin-left:-20px;
+}
+.txs ul li{
+    overflow-x:auto;
+}
+#send-select{
+    font-size:12px !important;
+    color:#888;
+}
+.acc-selector{
+    color:#fff;
+    padding:20px;
+    background:#592191;
+    font-family: 'Merriweather', 'Helvetica Neue', Arial, sans-serif;
+    box-shadow:3px 3px 5px #888;
+}
+.green{
+    color:#8c44d5;
+}
+.red{
+    color:#aa0000;
+}
+.accounts{
+    height:410px;
+    word-break: break-all;
+}
+.recent ul, .accounts ul, .txs ul{
+    padding-left:5px;
+}
+.txs{
+    margin-top:20px;
+}
+.gborder{
+    border: solid 1px #ddd;
+}
+.blk-type{
+    font-weight:bold;
+}
+.send{
+    color:#aa0000;
+}
+.receive{
+    color:#8c44d5;
+}
+.open{
+    color:#0061ff;
+}
+.change{
+    color:#00b232;
+}
+.blk-amount{
+    font-size:20px;
+}
+.main-box{
+    margin-top:0px;
+    /*padding:30px;*/
+    /*color:#fff;*/
+    /*border: solid 1px #592191;*/
+    font-family: 'Merriweather', 'Helvetica Neue', Arial, sans-serif;
+    /*box-shadow:3px 3px 5px #888;*/
+}
+.b-line{
+    border-bottom:solid 1px #888;
+    padding-bottom:20px;
+}
+.stat-box{
+    color:#fff;
+    padding:20px;
+    background:#592191;
+    font-family: 'Merriweather', 'Helvetica Neue', Arial, sans-serif;
+    box-shadow:3px 3px 5px #888;
+}
+.buttons a, .buttons button{
+    margin-top:10px;
+}
