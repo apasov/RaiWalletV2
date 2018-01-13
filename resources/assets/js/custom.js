@@ -27,6 +27,8 @@ var pow_workers;
 var identifier = "";
 
 var RESOLVE_FORKS_BLOCK_BATCH_SIZE = 20;
+var RAI_TO_RAW = "000000000000000000000000";
+var MILLION = 1000000;
 
 $(document).ready(function(){
 	
@@ -329,6 +331,19 @@ $(document).ready(function(){
 		for(let i in pendingblks)
 			$('#ready-blocks').append(readyblks[i].getJSONBlock());
 	});
+
+	function rawToMrai(value)
+	{
+		if (typeof value !== 'string') {
+			throw 'rawToMrai expects a string';
+		}
+
+		const amountRaw = bigInt(value);
+		const amountRai = amountRaw.divide("1000000000000000000000000");
+		const amountMrai = parseFloat(amountRai / MILLION);
+
+		return amountMrai;
+	}
 	
 	function addAccountToGUI(accountObj)
 	{
@@ -911,14 +926,37 @@ $(document).ready(function(){
 				lastAction = Date.now() / 1000;
 			});
 			
+			const params = (new URL(location)).searchParams;
+			let encoded_address = params.get('encoded_address');
+			let amountMrai = params.get('amount') ? rawToMrai(params.get('amount')) : undefined;
+
 			window.history.pushState("home", "RaiWallet - Home", "/home");
 			document.title = 'RaiWallet - Home';
-			
+
 			setTimeout(function(){
-				$('.landing').fadeOut(500, function(){$('.landing').remove(); $('.wallet-wrapper').fadeIn();});
+				$('.landing').fadeOut(500, function(){
+					$('.landing').remove();
+					$('.wallet-wrapper').fadeIn();
+				});
+
+				if (encoded_address || amountMrai) {
+					$("#send-modal").on('shown.bs.modal', function (e) {
+						if (encoded_address && functions.parseXRBAccount(encoded_address)) {
+							$("#to").val(encoded_address);
+						}
+						if (amountMrai && isFinite(amountMrai)) {
+							$("#samount").val(amountMrai);
+						}
+						// Remove the event
+						$("#send-modal").off('shown.bs.modal');
+						// Set to undefined, incase this method is called again
+						amountMrai = undefined;
+						encoded_address = undefined;
+					});
+					$("#send-modal").modal();
+				}
 			}, 1000);
 		});
-
 	}
 	
 	$('.form-register').submit(function(e){
