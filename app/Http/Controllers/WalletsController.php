@@ -18,11 +18,14 @@ use App\Mail\RecoveryMail;
 
 use App\Custom\RaiNode;
 
+use Symfony\Component\HttpFoundation\Cookie;
+
 class WalletsController extends Controller
 {
     
     private $wallet;
     private $google2fa;
+    private $cookies = [];
     
     public function __construct()
     {
@@ -92,7 +95,11 @@ class WalletsController extends Controller
         if(!is_array($data))
             $data = [$data];
         $data = array_merge(['status' => 'success'], $data);
-        return response()->json($data);
+        $res = response()->json($data);
+        if(count($this->cookies) > 0)
+            foreach($this->cookies as $cookie)
+                $res->cookie($cookie);
+        return $res;
     }
     
     protected function error($msg)
@@ -250,6 +257,12 @@ class WalletsController extends Controller
             $return['_2fa_qr_url'] = $this->get2faQrUrl($wallet->_2fa_key, $wallet->identifier);
             $return['_2fa_confirmed'] = 1;
         }
+
+        // this is just to remember user identifier at payments.raiwallet.com without putting the identifier in the cookie
+        $wallet_token = hash('sha256', time() . $wallet->identifier);
+        $wallet->cookie_token = $wallet_token;
+        $this->cookies[] = cookie('wallet_token', $wallet_token, 60 * 24 * 90);
+        $wallet->save();
         return $this->success($return);
     }
     
