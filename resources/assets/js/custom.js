@@ -273,6 +273,12 @@ $(document).ready(function(){
                 break;
         }
     }
+
+	window.onbeforeunload = function(e) {
+		var dialogText = 'Refreshing the page will require you to decrypt your wallet again.';
+		e.returnValue = dialogText;
+		return dialogText;
+	};
     
     $(function () {
       $('[data-toggle="tooltip"]').tooltip()
