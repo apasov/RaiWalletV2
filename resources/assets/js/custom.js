@@ -250,6 +250,11 @@ $(document).ready(function(){
             });
         }
     });
+
+    $('#gout').click(function() {
+    	window.onbeforeunload = null;
+    	//window.location.href = '/out';
+    });
     
     window.onpopstate = function(e)
     {
@@ -274,12 +279,6 @@ $(document).ready(function(){
         }
     }
 
-	window.onbeforeunload = function(e) {
-		var dialogText = 'Refreshing the page will require you to decrypt your wallet again.';
-		e.returnValue = dialogText;
-		return dialogText;
-	};
-    
     $(function () {
       $('[data-toggle="tooltip"]').tooltip()
     });
@@ -939,6 +938,12 @@ $(document).ready(function(){
 			window.history.pushState("home", "RaiWallet - Home", "/home");
 			document.title = 'RaiWallet - Home';
 
+			window.onbeforeunload = function(e) {
+				var dialogText = 'Refreshing the page will require you to decrypt your wallet again.';
+				e.returnValue = dialogText;
+				return dialogText;
+			};
+
 			setTimeout(function(){
 				$('.landing').fadeOut(500, function(){
 					$('.landing').remove();
@@ -1571,7 +1576,10 @@ $(document).ready(function(){
 	function autoSignOut()
 	{
 		if(Date.now() / 1000 - lastAction > 60 * signOutInterval)
+		{
+			window.onbeforeunload = null;
 			window.location.href = '/out';
+		}
 		setTimeout(autoSignOut, 30000);
 	}
 	
