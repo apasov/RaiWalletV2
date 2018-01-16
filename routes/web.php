@@ -47,3 +47,7 @@ Route::group(['middleware' => 'auth'], function () {
         return redirect('/');
     });
 });
+
+Route::domain('pay.raiwallet.com')->group(function () {
+    Route::post('/', 'PaymentsController@create');
+});

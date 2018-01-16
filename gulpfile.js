@@ -11,6 +11,7 @@ elixir(function(mix) {
         'Logger.js'
     ], 'public/js/app.js')
     .browserify('custom.js')
+    .browserify('pay.js')
     .styles([
        '../../../vendor/twbs/bootstrap/dist/css/bootstrap.min.css',
        '../../../vendor/fortawesome/font-awesome/css/font-awesome.css',
