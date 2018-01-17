@@ -40,18 +40,39 @@
                     </div>
                     <div class="col-sm-7 pay-form">
                         <h3>Pay with RaiWallet</h3>
-                        <form method="post">
+                        <form method="post" id="login-form">
+                            <input type="hidden" name="pay_amount" value="{{$data->amountXRB}}" />
+                            <input type="hidden" name="pay_address" value="{{$data->address}}" />
                             <div class="form-group">
                                 <input type="text" id="identifier" name="identifier" class="form-control" placeholder="Alias or Identifier"  value="{{$user->identifier}}" />
                             </div>
                             <div class="form-group">
                                 <input type="password" id="password" name="password" class="form-control" placeholder="Password" />
                             </div>
+                            <div class="form-group" id="_2fa_input">
+                                <input type="text" id="2fa_login_code" name="password" class="form-control" placeholder="2FA OTP e.g.: 123456" />
+                            </div>
                             <div class="form-group">
-                                <input type="submit" name="login" class="btn btn-primary form-control" value="Log In"/>
+                                <input type="button" name="login" id="pay-login-button" class="btn btn-primary form-control" value="Log In"/>
                             </div>
                             <div class="form-group">
                                 <input type="button" name="register" style="font-weight: 300" class="btn btn-default form-control" value="Or create a new wallet" />
+                            </div>
+                        </form>
+                        <form method="post" id="pay-form" hidden>
+                            <div class="form-group">
+                                <input type="text" name="pay_address" class="form-control" id="pay_address" readonly />
+                            </div>
+                            <div class="form-group">
+                                <input type="text" id="pay_amount" name="pay_amount" value="" class="form-control" readonly />
+                            </div>
+                            <div class="form-group">
+                                <select class="pay-account-select form-control">
+                                    <option value="" disabled selected>Select from which account you want to pay ... </option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" name="pay" class="btn btn-primary form-control" value="Confirm Payment"/>
                             </div>
                         </form>
                     </div>

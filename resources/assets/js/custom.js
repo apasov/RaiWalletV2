@@ -1582,5 +1582,81 @@ $(document).ready(function(){
 		}
 		setTimeout(autoSignOut, 30000);
 	}
+
+	// raiwallet pay functions
+	function addAccountToPaySelect(account)
+	{
+		if(account.label)
+			$('.pay-account-select').append('<option value="'+account.account'+"> '+(account.balance.over("1000000000000000000000000").toJSNumber() / 1000000).toFixed(6)+' XRB - '+account.label+' ('+account.account+')</option>');
+		else
+			$('.pay-account-select').append('<option value="'+account.account'+"> '+(account.balance.over("1000000000000000000000000").toJSNumber() / 1000000).toFixed(6)+' XRB - '+account.account+'</option>');
+	}
+
+	function signInAndPay()
+	 {
+		var wid = $('#identifier').val();
+		var code = $('#2fa_login_code').val();
+		
+		$('input').prop('disabled', true);
+		$.post('/wallet/login', 'action=login&identifier='+wid+'&_2fa='+code+"&_2farequired="+_2fa_required, function(data){
+			
+			if(data.status == 'success')
+			{
+				if(data._2fa)
+				{
+					$('#2fa_login_code').val('');
+					$('#_2fa_input').fadeIn();
+					alertInfo("Enter google authenticator code.");
+					_2fa_required = 1;
+				}
+				else
+				{
+					// decrypt wallet and check checksum
+					wallet = new RaiWallet($('#password').val());
+					$('#password').val('');
+					wallet.lightWallet(true);
+					
+					try{
+						wallet.load(data.wallet);
+					}catch(e){
+						alertError('Error decrypting wallet. Check that the password is correct.');
+						$('input').prop('disabled', 0);
+						return;
+					}
+					checkChains(function(err) {
+						if(err) {
+							alertError('Error trying to fetch wallet balances. Try again.');
+							return;
+						}
+						// show user accounts and balances
+						$('#pay_address').val(data.address);
+						$('#pay_amount').val(data.amountXRB);
+
+						var accs = wallet.getAccounts();
+						for(let i in accs)
+						{
+							let acc = accs[i];
+							acc.balance = wallet.getAccountBalance(acc.account);
+							addAccountToPaySelect(acc);
+						}
+
+						$('#login-form').fadeOut(250, function() {
+							$('#pay-form').fadeIn(250);
+						})
+					})
+
+				}
+			}
+			else
+			{
+				alertError(data.msg);
+			}
+			$('input').prop('disabled', 0);            
+		});
+		return false;
+	}
+
+	// raiwallet pay listeners
+	$('#pay-login-button').click(signInAndPay);
 	
 });

@@ -56,6 +56,7 @@ class PaymentsController extends Controller
     	$data->amountXRB = number_format($json->amountXRB, 6);
     	$data->product = $request->product;
     	$data->reference = $request->invoiceId;
+        $data->address = $json->accountToPay;
 
     	$user = new \stdClass();
     	$user->identifier = null;
