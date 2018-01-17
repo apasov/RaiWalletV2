@@ -11,6 +11,12 @@
 |
 */
 
+Route::domain('pay.raiwallet.com')->group(function () {
+    Route::get('/', 'PaymentsController@create');
+    Route::get('/test', function(){return view('test');});
+    Route::post('/', 'PaymentsController@create');
+});
+
 Route::get('/', function () {
     return view('index');
 });

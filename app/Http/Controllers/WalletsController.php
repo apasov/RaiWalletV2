@@ -261,7 +261,7 @@ class WalletsController extends Controller
         // this is just to remember user identifier at payments.raiwallet.com without putting the identifier in the cookie
         $wallet_token = hash('sha256', time() . $wallet->identifier);
         $wallet->cookie_token = $wallet_token;
-        $this->cookies[] = cookie('wallet_token', $wallet_token, 60 * 24 * 90);
+        $this->cookies[] = cookie('wallet_token', $wallet_token, 60 * 24 * 90, null, '.raiwallet.com');
         $wallet->save();
         return $this->success($return);
     }

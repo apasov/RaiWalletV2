@@ -5,7 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Validator;
+
+use Symfony\Component\HttpFoundation\Cookie;
+
 use App\Payment;
+use App\Wallet;
 
 
 class PaymentsController extends Controller
@@ -58,7 +62,22 @@ class PaymentsController extends Controller
     	if($request->cookie('wallet_token'))
     	{
     		// get user identifier
+    		$wallet = Wallet::where('cookie_token', $request->cookie('wallet_token'))->first();
+    		if($wallet) 
+    		{
+    			$user->identifier = $wallet->identifier;
+    		
+	    		// refresh token
+	    		$wallet_token = hash('sha256', time() . $wallet->identifier);
+			    $wallet->cookie_token = $wallet_token;
+			    $wallet->save();
+			    $cookie = cookie('wallet_token', $wallet_token, 60 * 24 * 90, null, '.raiwallet.com');
+    		}
     	}
-    	return response()->view('paymentHorizontal', ['user' => $user, 'data' => $data]);
+    	
+    	$res = response()->view('paymentHorizontal', ['user' => $user, 'data' => $data]);
+    	if(isset($cookie))
+    		$res->cookie($cookie);
+    	return $res;
     }
 }
