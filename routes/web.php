@@ -49,5 +49,8 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 Route::domain('pay.raiwallet.com')->group(function () {
+    Route::get('/', function() {
+        return view('paymentHorizontal');
+    });
     Route::post('/', 'PaymentsController@create');
 });
