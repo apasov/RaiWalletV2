@@ -26,7 +26,7 @@
                                 <h4>{{$data->companyName}}</h4>
                                 <ul>
                                     <li><span class="boldy">Item:</span> {{$data->product}}</li>
-                                    <li><span class="boldy">Amount:</span> {{$data->amountUSD}}</li>
+                                    <li><span class="boldy">Price:</span> {{$data->amountUSD}}</li>
                                     @if($data->reference)
                                     <li><span class="boldy">Reference:</span> {{$data->reference}}</li>
                                     @endif
@@ -39,10 +39,8 @@
                         </div>
                     </div>
                     <div class="col-sm-7 pay-form">
-                        <h3>Pay with RaiWallet</h3>
+                        <h3 id="pay-title">Pay with RaiWallet</h3>
                         <form method="post" id="login-form">
-                            <input type="hidden" name="pay_amount" value="{{$data->amountXRB}}" />
-                            <input type="hidden" name="pay_address" value="{{$data->address}}" />
                             <div class="form-group">
                                 <input type="text" id="identifier" name="identifier" class="form-control" placeholder="Alias or Identifier"  value="{{$user->identifier}}" />
                             </div>
@@ -60,11 +58,9 @@
                             </div>
                         </form>
                         <form method="post" id="pay-form" hidden>
+                            <input type="hidden" value="{{$data->address}}" name="pay_address" class="form-control" id="pay_address" readonly />
                             <div class="form-group">
-                                <input type="text" name="pay_address" class="form-control" id="pay_address" readonly />
-                            </div>
-                            <div class="form-group">
-                                <input type="text" id="pay_amount" name="pay_amount" value="" class="form-control" readonly />
+                                <input type="text" value="{{$data->amountXRB}}" id="pay_amount" name="pay_amount" value="" class="form-control" readonly />
                             </div>
                             <div class="form-group">
                                 <select class="pay-account-select form-control">
@@ -72,9 +68,17 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <input type="submit" name="pay" class="btn btn-primary form-control" value="Confirm Payment"/>
+                                <input type="checkbox" name="email-notification" id="email-checkbox" checked /> Send me an email with the payment details!
+                            </div>
+                            <div class="form-group">
+                                <input type="button" name="pay" id="confirm-pay" class="btn btn-primary form-control" value="Confirm Payment"/>
                             </div>
                         </form>
+                        <div class="pay-success text-center" hidden>
+                            <h4>Payment successful!</h4>
+                            <i class="fa fa-check-square-o" aria-hidden="true"></i>
+                            <h6><a href="" target="_blank" id="hash_link"></a></h6>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -566,3 +566,10 @@ body {
   border-width:1px;
   margin-bottom:10px;
 }
+#_2fa_input{
+  display:none;
+}
+.pay-success i{
+  font-size:150px;
+  color:#8c44d5;
+}

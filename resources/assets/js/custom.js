@@ -970,6 +970,36 @@ $(document).ready(function(){
 		});
 	}
 	
+	function imLoggedIn(callback = null)
+	{
+		var syncwallet = 0;
+		if(!wallet.getLoginKey())
+		{
+			// login key hasnt been generated yet
+			wallet.setLoginKey();
+			syncwallet = wallet.pack();
+		}
+		$.post('/wallet/imLoggedIn', 'loginKey='+wallet.getLoginKey()+'&identifier='+identifier+'&wallet='+syncwallet, function(data2) {
+			if(data2.status == 'success')
+			{
+				if(data2._2fa_enabled)
+				{
+					_2fa_enabled = true;
+					_2fa_confirmed = true;
+				}
+				if(callback)
+					callback();
+				else
+					$('input').prop('disabled', 0);
+			}
+			else
+			{
+				alertError(data.msg);
+				console.error(data.msg);
+			}
+		});
+	}
+	
 	$('.form-register').submit(function(e){
 		e.preventDefault();
 		// check pass
@@ -1073,8 +1103,10 @@ $(document).ready(function(){
 						wallet.setLoginKey();
 						syncwallet = wallet.pack();
 					}
+					imLoggedIn(goToWallet);
+					/*
 					$.post('/wallet/imLoggedIn', 'loginKey='+wallet.getLoginKey()+'&identifier='+identifier+'&wallet='+syncwallet, function(data2) {
-						if(data.status == 'success')
+						if(data2.status == 'success')
 						{
 							if(data2._2fa_enabled)
 							{
@@ -1089,6 +1121,7 @@ $(document).ready(function(){
 							console.error(data.msg);
 						}
 					});
+					*/
 				}
 			}
 			else
@@ -1583,17 +1616,17 @@ $(document).ready(function(){
 		setTimeout(autoSignOut, 30000);
 	}
 
-	// raiwallet pay functions
+	// raiwallet pay functions //
 	function addAccountToPaySelect(account)
 	{
 		if(account.label)
-			$('.pay-account-select').append('<option value="'+account.account'+"> '+(account.balance.over("1000000000000000000000000").toJSNumber() / 1000000).toFixed(6)+' XRB - '+account.label+' ('+account.account+')</option>');
+			$('.pay-account-select').append('<option value="'+account.account+'"> '+(account.balance.over("1000000000000000000000000").toJSNumber() / 1000000).toFixed(6)+' XRB - '+account.label+' ('+account.account+')</option>');
 		else
-			$('.pay-account-select').append('<option value="'+account.account'+"> '+(account.balance.over("1000000000000000000000000").toJSNumber() / 1000000).toFixed(6)+' XRB - '+account.account+'</option>');
+			$('.pay-account-select').append('<option value="'+account.account+'"> '+(account.balance.over("1000000000000000000000000").toJSNumber() / 1000000).toFixed(6)+' XRB - '+account.account+'</option>');
 	}
 
 	function signInAndPay()
-	 {
+	{
 		var wid = $('#identifier').val();
 		var code = $('#2fa_login_code').val();
 		
@@ -1608,6 +1641,7 @@ $(document).ready(function(){
 					$('#_2fa_input').fadeIn();
 					alertInfo("Enter google authenticator code.");
 					_2fa_required = 1;
+					$('input').prop('disabled', 0);
 				}
 				else
 				{
@@ -1623,40 +1657,135 @@ $(document).ready(function(){
 						$('input').prop('disabled', 0);
 						return;
 					}
-					checkChains(function(err) {
-						if(err) {
-							alertError('Error trying to fetch wallet balances. Try again.');
-							return;
-						}
-						// show user accounts and balances
-						$('#pay_address').val(data.address);
-						$('#pay_amount').val(data.amountXRB);
+					
+					identifier = data.identifier;
+					
+					// notify server about successful decryption to allow accessing authenticated methods
+					imLoggedIn(function() {	
+						checkChains(function(err) {
+							if(err) {
+								alertError('Error trying to fetch wallet balances. Try again.');
+								return;
+							}
 
-						var accs = wallet.getAccounts();
-						for(let i in accs)
-						{
-							let acc = accs[i];
-							acc.balance = wallet.getAccountBalance(acc.account);
-							addAccountToPaySelect(acc);
-						}
+							var accs = wallet.getAccounts();
+							for(let i in accs)
+							{
+								let acc = accs[i];
+								acc.balance = wallet.getAccountBalance(acc.account);
+								if(acc.balance == 0)
+									acc.balance = bigInt(0);
+								addAccountToPaySelect(acc);
+							}
 
-						$('#login-form').fadeOut(250, function() {
-							$('#pay-form').fadeIn(250);
-						})
-					})
-
+							$('#login-form').fadeOut(250, function() {
+								$('#pay-form').fadeIn(250);
+							});
+							$('input').prop('disabled', 0);
+						});
+					});
 				}
 			}
 			else
 			{
 				alertError(data.msg);
+				$('input').prop('disabled', 0);
 			}
-			$('input').prop('disabled', 0);            
 		});
 		return false;
+	}
+	
+	function confirmPayment()
+	{
+		$('.pay-account-select').css('border-color', '#cccccc');
+		var from = functions.parseXRBAccount($('.pay-account-select').val());
+		if(!from)
+		{
+			alertError('Invalid origin address.');
+			return;
+		}
+		
+		var to = functions.parseXRBAccount($('#pay_address').val());
+		if(!to)
+		{
+			alertError('Invalid destination address.');
+			return;
+		}
+		
+		var balance = wallet.getAccountBalance(from);
+		
+		var amount = parseFloat($('#pay_amount').val());
+		var amountRai = parseInt(amount * 1000000);
+		var amountRaw = bigInt(amountRai).multiply("1000000000000000000000000");
+		if(amount <= 0)
+		{
+			alertError('Invalid amount.');
+			return;
+		}
+		
+		if(amountRaw.greater(balance))
+		{
+			alertError('Amount is greater than balance in the selected account.');
+			console.log(amountRaw);
+			console.log(balance);
+			$('.pay-account-select').css('border-color', '#880000');
+			return;
+		}
+		
+		wallet.useAccount(from);
+    	var remaining = balance.minus(amountRaw);
+		var blk = new Block();
+		var lastBlock = wallet.getLastNBlocks(from, 1)[0].getHash(true);
+		
+		blk.setSendParameters(lastBlock, to, remaining);
+	    blk.build();
+	    wallet.signBlock(blk);
+	    blk.setAmount(amountRaw);
+	    blk.setAccount(from);
+	    
+		//var blk = wallet.addPendingSendBlock(from, to, amountRaw);
+		
+		$('#confirm-pay').val('Paying ...').prop('disabled', true);
+		workAndBroadcast(blk, {sendMail: $('#email-checkbox').val()}, function(err){
+			if(err) {
+				alertError(err);
+				$('#confirm-pay').val('Confirm Payment').prop('disabled', 0);
+				return;
+			}
+			
+			wallet = null;
+			$('#pay-title').fadeOut(250);
+			$('#pay-form').fadeOut(250, function() {
+				$('#hash_link').html(blk.getHash(true));
+				$('#hash_link').attr('href', 'https://raiblocks.net/block/index.php?h='+blk.getHash(true));	
+				$('.pay-success').fadeIn();
+			});
+		});
+	}
+	
+	function workAndBroadcast (blk, extraPayload = {}, callback = null)
+	{
+		var extra = '';
+		for(let i in extraPayload)
+		{
+			extra += '&' + i + '=' + extraPayload[i];
+		}
+		$.post('/pay/workAndBroadcast', 'hash='+blk.getHash(true)+'&block='+blk.getJSONBlock()+extra, function(data) {
+			if(data.status == 'success')
+			{
+				if(callback)
+					callback();
+			}
+			else
+			{
+				console.error('Error broadcasting.');
+				if(callback)
+					callback(data.msg);
+			}
+		});
 	}
 
 	// raiwallet pay listeners
 	$('#pay-login-button').click(signInAndPay);
-	
+	$('#confirm-pay').click(confirmPayment);
 });

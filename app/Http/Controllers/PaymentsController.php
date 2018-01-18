@@ -5,15 +5,53 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 
 use Symfony\Component\HttpFoundation\Cookie;
 
 use App\Payment;
 use App\Wallet;
+use App\Custom\RaiNode;
+
+use Mail;
+use App\Mail\PaymentMail;
 
 
 class PaymentsController extends Controller
 {
+	protected $cookies = [];
+	
+	protected function validateBlockHash($hash)
+    {
+        if(strlen($hash) != 64)
+            return false;
+        if(!hex2bin($hash))
+            return false;
+        return true;
+    }
+    
+    protected function success($data = [])
+    {
+        if(!is_array($data))
+            $data = [$data];
+        $data = array_merge(['status' => 'success'], $data);
+        $res = response()->json($data);
+        if(count($this->cookies) > 0)
+            foreach($this->cookies as $cookie)
+                $res->cookie($cookie);
+        return $res;
+    }
+    
+    protected function errorView($msg)
+    {
+        return response()->view('error', '', ['msg' => $msg]);
+    }
+    
+    protected function error($msg)
+    {
+        return response()->json(['status' => 'error', 'msg' => $msg]);
+    }
+    
     public function create(Request $request)
     {
     	$valid = Validator::make($request->all(), [
@@ -24,8 +62,11 @@ class PaymentsController extends Controller
     		'product' => 'string|nullable|regex:/^[0-9a-zA-Z-_ ]$/',
     	]);
     	if(!$valid)	
-    		return response()->view('error', '', ['msg' => 'Invalid parameters.']);
+    		return $this->errorView('Invalid parameters.');
     	
+    	if($request->amount < 0)
+    		return $this->errorView('Invalid amount.');
+    		
     	// request payment at arrowpay
     	$paymentRequest = [
     		'itemId' => $request->itemId,
@@ -38,7 +79,8 @@ class PaymentsController extends Controller
 		    \GuzzleHttp\RequestOptions::JSON => $paymentRequest
 		]);
 		if($res->getStatusCode() != 200)
-			return response()->view('error', ['msg' => 'Error connecting to ArrowPay.io. Try again later.']);
+			return $this->errorView('Error connecting to ArrowPay.io. Try again later.');
+
 		$json = $res->getBody();
 		$json = json_decode($json);
 	
@@ -76,9 +118,44 @@ class PaymentsController extends Controller
     		}
     	}
     	
+    	$request->session()->put('paymentData', $data);
     	$res = response()->view('paymentHorizontal', ['user' => $user, 'data' => $data]);
     	if(isset($cookie))
     		$res->cookie($cookie);
     	return $res;
+    }
+    
+    public function workAndBroadcast(Request $request)
+    {
+        if(!$this->validateBlockHash($request->hash))
+            return $this->error('Invalid block hash.');
+        
+        $blk = json_decode($request->block);
+        if(!$blk)
+            return $this->error('Invalid block data.');
+        
+        if(!$blk->previous || !$this->validateBlockHash($blk->previous))
+            return $this->error('Invalid previous block hash.');
+        
+        $node = new RaiNode();
+        $work = $node->work_generate(['hash' => $blk->previous])['work'];
+        $blk->work = $work;
+        
+        $blk = json_encode($blk);
+        $res = $node->process(['block' => $blk]);
+        
+        if(isset($res['error']))
+            return $this->error($res['error']);
+            
+        if($request->sendMail == 'on')
+        {
+        	// send email with payment details
+        	$wallet = Auth::user();
+        	$paymentData = $request->session()->pull('paymentData');
+        	$paymentData->hash = $request->hash;
+        	Mail::to($wallet->email)->send(new PaymentMail($paymentData));
+        }
+        
+        return $this->success();
     }
 }
