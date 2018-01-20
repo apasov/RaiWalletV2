@@ -78,7 +78,7 @@ class PaymentsController extends Controller
     	$payment->amountUSDCents = $APPayment->amount_XRB * $APPayment->exchange_xrb_usd * 100; 
     	$payment->payment_account = $APPayment->account_to;
     	$payment->amountUSDCentsAP = $payment->amountUSDCents;
-    	$payment->APtoken = $request->id;
+    	$payment->APtoken = $request->token;
         $payment->save();
 		
     	$data = new \stdClass();
