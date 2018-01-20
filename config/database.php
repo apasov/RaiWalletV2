@@ -78,6 +78,19 @@ return [
             'prefix' => '',
         ],
 
+        'arrowpay' => [
+            'driver' => 'pgsql',
+            'host' => env('DB_HOST_AP', ''),
+            'port' => env('DB_PORT_AP', ''),
+            'database' => env('DB_DATABASE_AP', ''),
+            'username' => env('DB_USERNAME_AP', ''),
+            'password' => env('DB_PASSWORD_AP', ''),
+            'charset' => 'utf8',
+            'prefix' => '',
+            'schema' => 'public',
+            'sslmode' => 'prefer',
+        ],
+
     ],
 
     /*

@@ -12,6 +12,8 @@ use Symfony\Component\HttpFoundation\Cookie;
 use App\Payment;
 use App\Wallet;
 use App\Custom\RaiNode;
+use App\ArrowPayPayment;
+use App\ArrowPayMerchant;
 
 use Mail;
 use App\Mail\PaymentMail;
@@ -52,53 +54,40 @@ class PaymentsController extends Controller
         return response()->json(['status' => 'error', 'msg' => $msg]);
     }
     
+    public function test(Request $request)
+    {
+        print_r(ArrowPayPayment::where('id', '01a792d3-fea1-4130-acb7-d71247f5f2a1')->first());
+    }
+
     public function create(Request $request)
     {
-    	$valid = Validator::make($request->all(), [
-    		'invoiceId' => 'string|nullable',
-    		'amount' => 'required|numeric',
-    		'publicKey' => 'required|string|regex:/^public_[0-9a-zA-Z-_]$/',
-    		'companyName' => 'required|string|regex:/^[0-9a-zA-Z-_ ]$/',
-    		'product' => 'string|nullable|regex:/^[0-9a-zA-Z-_ ]$/',
-    	]);
+        $valid = Validator::make($request->all(), [
+            'token' => 'string|required|regex:/[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}/'
+        ]);
     	if(!$valid)	
     		return $this->errorView('Invalid parameters.');
     	
-    	if($request->amount < 0)
-    		return $this->errorView('Invalid amount.');
-    		
-    	// request payment at arrowpay
-    	$paymentRequest = [
-    		'itemId' => $request->itemId,
-    		'amount' => $request->amount,
-    		'publicKey' => $request->publicKey
-    	];
-    	
-    	$client = new \GuzzleHttp\Client();
-    	$res = $client->post('https://arrowpay.io/api/payment/start', [
-		    \GuzzleHttp\RequestOptions::JSON => $paymentRequest
-		]);
-		if($res->getStatusCode() != 200)
-			return $this->errorView('Error connecting to ArrowPay.io. Try again later.');
+        
+        // retrieve data
+        $APPayment = ArrowPayPayment::where('id', $request->token)->first();
+        $APMerchant = ArrowPayMerchant::where('id', $APPayment->owner)->first();
 
-		$json = $res->getBody();
-		$json = json_decode($json);
-	
     	$payment = new Payment();
-    	$payment->publicKey = $request->publicKey;
-    	$payment->reference = $request->invoiceId;
-    	$payment->amountUSDCents = $request->amount * 100; 
-    	$payment->payment_account = $json->accountToPay;
-    	$payment->amountUSDCentsAP = $json->amountUSD;
-    	$payment->APtoken = $json->token;
+    	$payment->publicKey = $APMerchant->public_key;
+    	$payment->reference = $APPayment->item_id;
+    	$payment->amountUSDCents = $APPayment->amount_XRB * $APPayment->exchange_xrb_usd * 100; 
+    	$payment->payment_account = $APPayment->account_to;
+    	$payment->amountUSDCentsAP = $payment->amountUSDCents;
+    	$payment->APtoken = $request->id;
+        $payment->save();
 		
     	$data = new \stdClass();
-    	$data->companyName = $request->companyName; // escape
-    	$data->amountUSD = number_format($json->amountUSD / 100, 2);
-    	$data->amountXRB = number_format($json->amountXRB, 6);
-    	$data->product = $request->product;
-    	$data->reference = $request->invoiceId;
-        $data->address = $json->accountToPay;
+    	$data->companyName = $APMerchant->name;
+    	$data->amountUSD = number_format($payment->amountUSDCents / 100, 2);
+    	$data->amountXRB = number_format($APPayment->amount_XRB, 6);
+    	$data->product = $APPayment->description;
+    	$data->reference = $APPayment->item_id;
+        $data->address = $APPayment->account_to;
 
     	$user = new \stdClass();
     	$user->identifier = null;
@@ -109,12 +98,6 @@ class PaymentsController extends Controller
     		if($wallet) 
     		{
     			$user->identifier = $wallet->identifier;
-    		
-	    		// refresh token
-	    		$wallet_token = hash('sha256', time() . $wallet->identifier);
-			    $wallet->cookie_token = $wallet_token;
-			    $wallet->save();
-			    $cookie = cookie('wallet_token', $wallet_token, 60 * 24 * 90, null, '.raiwallet.com');
     		}
     	}
     	
