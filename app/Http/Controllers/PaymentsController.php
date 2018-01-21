@@ -79,7 +79,9 @@ class PaymentsController extends Controller
     	$payment->payment_account = $APPayment->account_to;
     	$payment->amountUSDCentsAP = $payment->amountUSDCents;
     	$payment->APtoken = $request->token;
-        $payment->save();
+    	
+    	if(!Payment::where('APtoken', $request->token)->first())
+            $payment->save();
 		
     	$data = new \stdClass();
     	$data->companyName = $APMerchant->name;
