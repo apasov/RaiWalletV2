@@ -99,7 +99,7 @@ class PaymentsController extends Controller
     		$wallet = Wallet::where('cookie_token', $request->cookie('wallet_token'))->first();
     		if($wallet) 
     		{
-    			$user->identifier = $wallet->identifier;
+    			$user->identifier = $wallet->alias ? $wallet->alias : $wallet->identifier;
     		}
     	}
     	
