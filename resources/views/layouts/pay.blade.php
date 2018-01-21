@@ -38,7 +38,7 @@
     <meta name="theme-color" content="#ffffff">
     
 </head>
-<body class="bg-primary">
+<body class="bg-primary body-pay">
     
     @yield('content')
     

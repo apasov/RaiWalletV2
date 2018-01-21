@@ -519,9 +519,8 @@ body {
   }
 }
 .main-container{
-  height:100vh;
-  overflow:hidden;
-  padding-top:29vh;
+  display:table-cell;
+  vertical-align:middle;
 }
 .pay-form h1,
 .pay-form h2,
@@ -572,4 +571,8 @@ body {
 .pay-success i{
   font-size:150px;
   color:#8c44d5;
+}
+
+.body-pay{
+  display:table;
 }
