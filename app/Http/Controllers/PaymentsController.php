@@ -87,7 +87,7 @@ class PaymentsController extends Controller
     	$data->companyName = $APMerchant->name;
     	$data->amountUSD = number_format($payment->amountUSDCents / 100, 2);
     	$data->amountXRB = number_format($APPayment->amount_XRB, 6);
-    	$data->product = $APPayment->description;
+    	$data->description = $APPayment->description;
     	$data->reference = $APPayment->item_id;
         $data->address = $APPayment->account_to;
 

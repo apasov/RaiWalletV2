@@ -25,10 +25,10 @@
                             <div class="col-xs-12 payment-description">
                                 <h4>{{$data->companyName}}</h4>
                                 <ul>
-                                    <li><span class="boldy">Item:</span> {{$data->product}}</li>
+                                    <li><span class="boldy">Item:</span> {{$data->reference}}</li>
                                     <li><span class="boldy">Price:</span> {{$data->amountUSD}}</li>
-                                    @if($data->reference)
-                                    <li><span class="boldy">Reference:</span> {{$data->reference}}</li>
+                                    @if($data->description)
+                                    <li><span class="boldy">Description:</span> {{$data->description}}</li>
                                     @endif
                                 </ul>
                                 <hr class="hr-1"/>
