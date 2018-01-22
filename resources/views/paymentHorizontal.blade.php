@@ -51,7 +51,9 @@
                                 <input type="text" id="2fa_login_code" name="password" class="form-control" placeholder="2FA OTP e.g.: 123456" />
                             </div>
                             <div class="form-group">
-                                <input type="button" name="login" id="pay-login-button" class="btn btn-primary form-control" value="Log In"/>
+                                <button type="button" name="login" id="pay-login-button" class="btn btn-primary form-control">
+                                    Log In
+                                </button>
                             </div>
                             <div class="form-group">
                                 <input type="button" name="register" style="font-weight: 300" class="btn btn-default form-control" value="Or create a new wallet" onclick="location.href='https://raiwallet.com'" />

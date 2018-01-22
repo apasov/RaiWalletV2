@@ -1631,6 +1631,7 @@ $(document).ready(function(){
 		var code = $('#2fa_login_code').val();
 		
 		$('input').prop('disabled', true);
+		$('#pay-login-button').html('<i class="fa fa-circle-o-notch fa-spin fa-fw"></i>');
 		$.post('/wallet/login', 'action=login&identifier='+wid+'&_2fa='+code+"&_2farequired="+_2fa_required, function(data){
 			
 			if(data.status == 'success')
@@ -1754,12 +1755,14 @@ $(document).ready(function(){
 			}
 			
 			wallet = null;
-			$('#pay-title').fadeOut(250);
-			$('#pay-form').fadeOut(250, function() {
-				$('#hash_link').html(blk.getHash(true));
-				$('#hash_link').attr('href', 'https://raiblocks.net/block/index.php?h='+blk.getHash(true));	
-				$('.pay-success').fadeIn();
-			});
+			setTimeout(function(){
+				$('#pay-title').fadeOut(250);
+				$('#pay-form').fadeOut(250, function() {
+					$('#hash_link').html(blk.getHash(true));
+					$('#hash_link').attr('href', 'https://raiblocks.net/block/index.php?h='+blk.getHash(true));	
+					$('.pay-success').fadeIn();
+				});
+			}, 3000); // 3 seconds delay to make sure the block propagates through the network before the user having the link to the explorer
 		});
 	}
 	
