@@ -82,7 +82,7 @@ class PaymentsController extends Controller
 
     	$payment = new Payment();
     	$payment->publicKey = $APMerchant->public_key;
-    	$payment->reference = $APPayment->item_id;
+    	$payment->reference = $APPayment->item_id ? $APPayment->item_id : $APPayment->id;
     	$payment->amountUSDCents = $APPayment->amount_XRB * $APPayment->exchange_xrb_usd * 100; 
     	$payment->payment_account = $APPayment->account_to;
     	$payment->amountUSDCentsAP = $payment->amountUSDCents;
