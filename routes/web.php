@@ -57,4 +57,7 @@ Route::group(['middleware' => 'auth'], function () {
     });
 });
 
+// public endpoints
+Route::post('/api/broadcast', 'ApiController@publicRebroadcast');
+
 
