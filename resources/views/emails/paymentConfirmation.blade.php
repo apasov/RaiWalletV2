@@ -17,10 +17,10 @@
         
         <h4>Purchase at {{$data->companyName}}</h4>
         <ul>
-            <li><span class="boldy">Item:</span> {{$data->product}}</li>
+            <li><span class="boldy">Item:</span> {{$data->reference}}</li>
             <li><span class="boldy">Price:</span> {{$data->amountUSD}}</li>
-            @if($data->reference)
-            <li><span class="boldy">Reference:</span> {{$data->reference}}</li>
+            @if($data->description)
+            <li><span class="boldy">Description:</span> {{$data->description}}</li>
             @endif
             <li><span class="boldy">Transaction hash:</span> {{ $data->hash }}</li>
         </ul>
