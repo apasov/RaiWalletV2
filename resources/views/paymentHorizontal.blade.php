@@ -54,7 +54,7 @@
                                 <input type="button" name="login" id="pay-login-button" class="btn btn-primary form-control" value="Log In"/>
                             </div>
                             <div class="form-group">
-                                <input type="button" name="register" style="font-weight: 300" class="btn btn-default form-control" value="Or create a new wallet" />
+                                <input type="button" name="register" style="font-weight: 300" class="btn btn-default form-control" value="Or create a new wallet" onclick="location.href='https://raiwallet.com'" />
                             </div>
                         </form>
                         <form method="post" id="pay-form" hidden>
