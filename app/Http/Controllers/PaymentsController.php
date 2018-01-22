@@ -46,7 +46,7 @@ class PaymentsController extends Controller
     
     protected function errorView($msg)
     {
-        return response()->view('error', '', ['msg' => $msg]);
+        return response()->view('error', ['msg' => $msg]);
     }
     
     protected function error($msg)
@@ -70,7 +70,15 @@ class PaymentsController extends Controller
         
         // retrieve data
         $APPayment = ArrowPayPayment::where('id', $request->token)->first();
+        
+        if(!$APPayment)
+            return $this->errorView('This invoice does not exist');
         $APMerchant = ArrowPayMerchant::where('id', $APPayment->owner)->first();
+        
+        if($APPayment->completed_at)
+            return $this->errorView('This invoice has already been paid.');
+        if($APPayment->closed)
+            return $this->errorView('This invoice expired.');
 
     	$payment = new Payment();
     	$payment->publicKey = $APMerchant->public_key;
