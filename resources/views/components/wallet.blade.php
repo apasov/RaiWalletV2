@@ -230,7 +230,7 @@
                         <div class="col-md-12">
                             <h3>2 Factor Authentication</h3>
                             <p>
-                                Increase you wallet security adding 2fa with google authenticator.
+                                Increase your wallet security adding 2FA (Google authenticator, Authy, etc.).
                             </p>
                             <form method="post" class="2fa_set_form">
                                 <div class="form-group" id="qr_2fa"></div>
