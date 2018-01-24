@@ -284,6 +284,9 @@
                 </div>
                 <div class="modal-body" style="padding:25px">
                     <form role="form" class="form-receive">
+                        <p class="text-left">
+                            In Raiblocks, representatives act as accounts that cast votes when global network consensus is required. Here, you can choose a representative to vote on your behalf. A list of representatives can be found <a href="https://raiblocks.net/page/representatives" target="_blank">here</a>.
+                        </p>                        
                         <div class="form-group">
                             <label for="wid">My Accounts</label>
                             <select name="from" id="change-select" class="form-control" style="font-family:monospace">
