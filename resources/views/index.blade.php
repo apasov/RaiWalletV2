@@ -6,10 +6,10 @@
             <div class="overlay">
                 <div class="header-content">
                     <div class="header-content-inner">
-                        <h1 id="homeHeading">Create your RaiBlocks web wallet</h1>
+                        <h1 id="homeHeading">Create your Nano web wallet</h1>
                         <hr>
                         <p>
-                            RaiWebWallet is the first RaiBlocks light wallet which keeps you in control of your private keys.
+                            NanoWallet.io is the first Nano light wallet which keeps you in control of your private keys.
                             There's no need to download the ledger to be in control over your money.
                         </p>
                         <a href="#about" class="btn btn-primary btn-xl page-scroll">Find Out More</a>
@@ -18,7 +18,7 @@
             </div>
         </header>
     
-        <section class="bg-primary" style="background:#592191" id="about">
+        <section class="bg-logo" id="about">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-8 col-lg-offset-2 text-center">
@@ -26,7 +26,7 @@
                         <hr class="light">
                         <p class="text-faded">
                             Don't wait for the wallet to sync to be able to make transactions. Send and receive payments from anywhere.
-                            Import or export your wallet from the official RaiBlocks implementation.
+                            Import or export your wallet from the official Nano implementation.
                             All this without letting anyone know your keys, you are the only owner of your money.
                         </p>
                         <a href="#services" class="page-scroll btn btn-default btn-xl sr-button">Get Started!</a>
@@ -39,7 +39,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12 text-center">
-                        <h2 class="section-heading">Still here?</h2>
+                        <h2 class="section-heading-dark">Still here?</h2>
                         <hr class="primary">
                     </div>
                 </div>
@@ -90,46 +90,19 @@
                 </div>
             </div>
         </aside>
-<!--        
-        <section class="bg-dark-2">
-            <div class="container text-center">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <h3>RaiBlocks Transactions Last 24h</h3>
-                                <span id="tfh"><i class="fa fa-circle-o-notch fa-spin fa-fw"></i></span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12" style="margin-top:50px">
-                                <h3>Amount Transferred Last 24h</h3>
-                                <span id="amtf"><i class="fa fa-circle-o-notch fa-spin fa-fw"></i></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-8">
-                        <div class="live">
-                            <div class="elem" style="display:none"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    -->    
-    
+
         <section id="contact">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-8 col-lg-offset-2 text-center">
-                        <h2 class="section-heading">Let's Get In Touch!</h2>
+                        <h2 class="section-heading-dark">Let's Get In Touch!</h2>
                         <hr class="primary">
                         <p>Do you want to tell us anything? Feel free to do so :)</p>
                     </div>
                     <div class="col-lg-8 col-lg-offset-2 text-center">
                         <i class="fa fa-envelope-o fa-3x sr-contact"></i>
                         <p style="overflow:hidden">
-                            <a href="mailto:support@raiwallet.com">support@raiwallet.com</a><br/> 
+                            <a href="mailto:support@nanowallet.io">support@nanowallet.io</a><br/> 
                             You are also invited to donate something :) <br/>
                             xrb_1ma5dct7jdc8o45135xbr1bwbsixr47xugisu5fnwo69byhcno5u946smqfp 
                         </p>
