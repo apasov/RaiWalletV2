@@ -130,7 +130,7 @@
         </div>
     </div>
     
-    <div class="modal fade" id="import-seed-modal" role="dialog">
+    <div class="modal fade" id="import-seed-modal" role="dialog" style="overflow-y:auto;">
         <div class="modal-dialog">
             <!-- Modal content-->
             <div class="modal-content">
