@@ -59,7 +59,9 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <p class="text-center">Already registered? <a href="#" class="login">Login</a></p>
+                    <p class="text-center">
+                    Already registered? <a href="#" class="login">Login</a><br/>
+                    Already have a Raiblocks wallet? <a href="#" class="import">Import your wallet with your seed</a></p>
                 </div>
             </div>
         </div>
@@ -137,6 +139,9 @@
                     <h4><span class="glyphicon glyphicon-lock"></span> Wallet from Seed</h4>
                 </div>
                 <div class="modal-body importing" style="padding:40px 50px;">
+                    <p class="text-left">
+                        Please take into consideration that all prior wallet addresses generated from the seed will have to be regenerated manually once logged in.
+                    </p>
                     <form role="form" class="form-import" method="post">
                         <div class="form-group">
                             <label for="email">Email</label>
