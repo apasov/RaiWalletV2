@@ -59,7 +59,9 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <p class="text-center">Already registered? <a href="#" class="login">Login</a></p>
+                    <p class="text-center">
+                    Already registered? <a href="#" class="login">Login</a><br/>
+                    Already have a Raiblocks wallet? <a href="#" class="import">Import your wallet with your seed</a></p>
                 </div>
             </div>
         </div>
@@ -76,7 +78,7 @@
                 <div class="modal-body" style="padding:40px 50px;">
                     <form role="form" class="form-login" method="post">
                         <div class="form-group">
-                            <label for="wid">Wallet Identifier <a href="#" id="lost_id">Lost your identifier?</a></label>
+                            <label for="wid">Wallet Identifier (Not email!) <a href="#" id="lost_id">Lost your identifier?</a></label>
                             <input type="text" name="wallet_id" id="wid" class="form-control" placeholder="e.g.: id_33f52770e537dbae2fe307bdc4ccd4de262c705e3b565f67b37754ad46f8525f" required />
                         </div>
                         <div class="form-group">
@@ -128,7 +130,7 @@
         </div>
     </div>
     
-    <div class="modal fade" id="import-seed-modal" role="dialog">
+    <div class="modal fade" id="import-seed-modal" role="dialog" style="overflow-y:auto;">
         <div class="modal-dialog">
             <!-- Modal content-->
             <div class="modal-content">
@@ -137,6 +139,9 @@
                     <h4><span class="glyphicon glyphicon-lock"></span> Wallet from Seed</h4>
                 </div>
                 <div class="modal-body importing" style="padding:40px 50px;">
+                    <p class="text-left">
+                        Please take into consideration that all prior wallet addresses generated from the seed will have to be regenerated manually once logged in.
+                    </p>
                     <form role="form" class="form-import" method="post">
                         <div class="form-group">
                             <label for="email">Email</label>
@@ -223,7 +228,7 @@
                         </div>
                         <div class="form-group">
                             <label for="amount">Amount (XRB/MRai)</label>
-                            <input type="text" name="amount" id="samount" class="form-control" placeholder="e.g.: 1000000.0000" required />
+                            <input type="text" name="amount" id="samount" class="form-control" placeholder="e.g.: 10.5" required />
                         </div>
                         <!--
                         <div class="form-group">
@@ -256,9 +261,10 @@
             
                             </select>
                         </div>
+                        <p>Note that the amount below is only used to create the recieve QR code. Any amount of XRB sent to the selected address will be credited.</p>
                         <div class="form-group">
                             <label for="amount">Amount (XRB/MRai)</label>
-                            <input type="text" name="amount" id="receive-amount" class="form-control" placeholder="e.g.: 1000000.0000" required />
+                            <input type="text" name="amount" id="receive-amount" class="form-control" placeholder="e.g.: 10.5" required />
                         </div>
                         <div class="form-group text-center" id="qr">
                             <div class="img img-responsive"></div>
