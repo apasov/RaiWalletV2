@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Wallet;
 use App\PoW;
 use App\LegacyWallet;
+use App\Address;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
@@ -279,8 +280,33 @@ class WalletsController extends Controller
     {
         $res = [];
         $node = new RaiNode();
+        $wallet = Auth::user();
         $accs = json_decode($request->accs, true);
         
+        if($wallet->accounts_n <  count($accs))
+        {
+            $successes = 0;
+            foreach($accs as $acc)
+            {
+                $address = new Address();
+                try {
+                   \DB::beginTransaction();
+                   $address->address = $acc;
+                   $address->wallet_id = $wallet->id;
+                   $address->save();
+                   \DB::commit();
+                   $successes++;
+                }catch(\Exception $e){
+                   \DB::rollback();
+                }
+            }
+            if($successes > 0)
+            {
+                $wallet->accounts_n = $wallet->accounts_n + $successes;
+                $wallet->save();
+            }
+        }
+
         $frontiers = $node->accounts_frontiers(['accounts' => $accs])['frontiers'];
         foreach($accs as $account)
         {
