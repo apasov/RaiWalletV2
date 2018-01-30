@@ -32,7 +32,7 @@ Route::post('/wallet/login', 'WalletsController@login');
 Route::post('/wallet/recovery', 'WalletsController@recovery');
 Route::post('/wallet/imLoggedIn', 'WalletsController@imLoggedIn');
 Route::get('/resources', function(){
-   return Redirect::to('https://github.com/jaimehgb/RaiWebWallet'); 
+   return Redirect::to('https://github.com/jaimehgb/RaiWalletV2/'); 
 });
 
 Route::group(['middleware' => 'auth'], function () {
