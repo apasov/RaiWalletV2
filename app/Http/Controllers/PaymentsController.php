@@ -54,11 +54,6 @@ class PaymentsController extends Controller
         return response()->json(['status' => 'error', 'msg' => $msg]);
     }
     
-    public function test(Request $request)
-    {
-        print_r(ArrowPayPayment::where('id', '01a792d3-fea1-4130-acb7-d71247f5f2a1')->first());
-    }
-
     public function create(Request $request)
     {
         $valid = Validator::make($request->all(), [
