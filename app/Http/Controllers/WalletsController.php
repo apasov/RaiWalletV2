@@ -229,6 +229,8 @@ class WalletsController extends Controller
                 }
                 else
                 {
+                    $wallet->login_key_enabled = 0;
+                    $wallet->save();
                     return $this->error('Invalid login key.');
                 }
             }
