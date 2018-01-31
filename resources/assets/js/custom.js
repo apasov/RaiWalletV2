@@ -158,8 +158,8 @@ $(document).ready(function(){
                 $('.dashboard').addClass('current');
                 if(!moving)
                 {
-                    window.history.pushState("home", "RaiWallet - Home", "/home");
-                    document.title = 'RaiWallet - Home';
+                    window.history.pushState("home", "NanoWallet - Home", "/home");
+                    document.title = 'NanoWallet - Home';
                 }
                 active = 'home';
                 moving = false;
@@ -179,8 +179,8 @@ $(document).ready(function(){
                 $('.transactions').addClass('current');
                 if(!moving)
                 {
-                    window.history.pushState("transactions", "RaiWallet - Transactions", "/transactions");
-                    document.title = 'RaiWallet - Transactions';
+                    window.history.pushState("transactions", "NanoWallet - Transactions", "/transactions");
+                    document.title = 'NanoWallet - Transactions';
                 }
                 active = 'transactions';
                 moving = false;
@@ -200,8 +200,8 @@ $(document).ready(function(){
                 $('.security').addClass('current');
                 if(!moving)
                 {
-                    window.history.pushState("security", "RaiWallet - Security", "/security");
-                    document.title = 'RaiWallet - Security';
+                    window.history.pushState("security", "NanoWallet - Security", "/security");
+                    document.title = 'NanoWallet - Security';
                 }
                 active = 'security';
                 moving = false;
@@ -242,8 +242,8 @@ $(document).ready(function(){
                 $('.debug').addClass('current');
                 if(!moving)
                 {
-                    window.history.pushState("debug", "RaiWallet - Debug", "/debug");
-                    document.title = 'RaiWallet - Debug';
+                    window.history.pushState("debug", "NanoWallet - Debug", "/debug");
+                    document.title = 'NanoWallet - Debug';
                 }
                 active = 'debug';
                 moving = false;
@@ -898,7 +898,7 @@ $(document).ready(function(){
 	function goToWallet()
 	{
 		// load wallet template
-		$('.landing').html('<div class="transition-overlay"><span>RAIWALLET</span><br/><i class="fa fa-circle-o-notch fa-spin fa-fw"></i></div>');
+		$('.landing').html('<div class="transition-overlay"><span>NANOWALLET</span><br/><i class="fa fa-circle-o-notch fa-spin fa-fw"></i></div>');
 		$(".modal").modal('hide');
 
 		// load elements and display wallet
@@ -935,8 +935,8 @@ $(document).ready(function(){
 			let encoded_address = params.get('encoded_address');
 			let amountMrai = params.get('amount') ? rawToMrai(params.get('amount')) : undefined;
 
-			window.history.pushState("home", "RaiWallet - Home", "/home");
-			document.title = 'RaiWallet - Home';
+			window.history.pushState("home", "NanoWallet - Home", "/home");
+			document.title = 'NanoWallet - Home';
 
 			window.onbeforeunload = function(e) {
 				var dialogText = 'Refreshing the page will require you to decrypt your wallet again.';
@@ -1595,7 +1595,7 @@ $(document).ready(function(){
 	$('#download_wallet').click(function(){
 		var data = wallet.pack();
 		var link = document.createElement('a');
-		link.download = 'RaiWalletBackUp.dat';
+		link.download = 'NanoWalletBackUp.dat';
 		var blob = new Blob([data], {type: 'text/plain'});
 		link.href = window.URL.createObjectURL(blob);
 		link.click();
