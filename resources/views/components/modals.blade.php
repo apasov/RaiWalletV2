@@ -61,7 +61,7 @@
                 <div class="modal-footer">
                     <p class="text-center">
                     Already registered? <a href="#" class="login">Login</a><br/>
-                    Already have a Raiblocks wallet? <a href="#" class="import">Import your wallet with your seed</a></p>
+                    Already have a Nano wallet? <a href="#" class="import">Import your wallet with your seed</a></p>
                 </div>
             </div>
         </div>
@@ -227,7 +227,7 @@
                             <input type="text" name="to" id="to" class="form-control" placeholder="Receiving account" required />
                         </div>
                         <div class="form-group">
-                            <label for="amount">Amount (XRB/MRai)</label>
+                            <label for="amount">Amount (Nano)</label>
                             <input type="text" name="amount" id="samount" class="form-control" placeholder="e.g.: 10.5" required />
                         </div>
                         <!--
@@ -263,7 +263,7 @@
                         </div>
                         <p>Note that the amount below is only used to create the recieve QR code. Any amount of XRB sent to the selected address will be credited.</p>
                         <div class="form-group">
-                            <label for="amount">Amount (XRB/MRai)</label>
+                            <label for="amount">Amount (Nano)</label>
                             <input type="text" name="amount" id="receive-amount" class="form-control" placeholder="e.g.: 10.5" required />
                         </div>
                         <div class="form-group text-center" id="qr">
@@ -291,7 +291,7 @@
                 <div class="modal-body" style="padding:25px">
                     <form role="form" class="form-receive">
                         <p class="text-left">
-                            In Raiblocks, representatives act as accounts that cast votes when global network consensus is required. Here, you can choose a representative to vote on your behalf. A list of representatives can be found <a href="https://raiblocks.net/page/representatives" target="_blank">here</a>.
+                            In Nano, representatives act as accounts that cast votes when global network consensus is required. Here, you can choose a representative to vote on your behalf. A list of representatives can be found <a href="https://raiblocks.net/page/representatives" target="_blank">here</a>.
                         </p>                        
                         <div class="form-group">
                             <label for="wid">My Accounts</label>

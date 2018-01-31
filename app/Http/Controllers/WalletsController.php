@@ -69,7 +69,7 @@ class WalletsController extends Controller
     protected function get2faQrUrl($key, $name)
     {
         return $this->google2fa->getQRCodeGoogleUrl(
-            'raiwallet.com',
+            'nanowallet.io',
             $name,
             $key
         ); 
@@ -264,11 +264,11 @@ class WalletsController extends Controller
             $return['_2fa_confirmed'] = 1;
         }
 
-        // this is just to remember user identifier at payments.raiwallet.com without putting the identifier in the cookie
+        // this is just to remember user identifier at payments.nanowallet.io without putting the identifier in the cookie
         // it's also used to determine if a given device is authorized to log in
         $wallet_token = hash('sha256', time() . $wallet->identifier);
         $wallet->cookie_token = $wallet_token;
-        $this->cookies[] = cookie('wallet_token', $wallet_token, 60 * 24 * 90, null, '.raiwallet.com');
+        $this->cookies[] = cookie('wallet_token', $wallet_token, 60 * 24 * 90, null, '.nanowallet.io');
         $wallet->save();
         return $this->success($return);
     }

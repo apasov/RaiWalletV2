@@ -5,7 +5,7 @@
             <ul class="sidebar-nav">
                 <li class="sidebar-brand">
                     <a href="#">
-                        RAIWALLET <span style="font-size:15px; color:#f00">Beta</span>
+                        NANOWALLET
                     </a>
                 </li>
                 <li class="active">
@@ -38,7 +38,7 @@
                         <div class="col-md-12 main-box">
                             <div class="row">
                                 <div class="col-xs-6 buttons">
-                                    <h2 style="font-weight:700">YOUR RAIBLOCKS, ANYWHERE.</h2>
+                                    <h2 style="font-weight:700">YOUR NANO, ANYWHERE.</h2>
                                     <a href="#menu-toggle" class="btn btn-info" id="menu-toggle">Toggle Menu</a>
                                     <button type="button" class="btn btn-primary" id="send">Send</button>
                                     <button type="button" class="btn btn-primary" id="receive">Receive</button>
@@ -107,7 +107,7 @@
                             </p>
                             <form method="post" class="form-minimum">
                                 <div class="form-group">
-                                    <label>Minimum receive amount (rai units)</label>
+                                    <label>Minimum receive amount </label>
                                     <input type="text" name="minimum_receive" id="minimum_receive" class="form-control" placeholder="e.g.: 1000000" />
                                 </div>
                                 <div class="form-group">
