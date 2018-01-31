@@ -78,6 +78,11 @@
                 <div class="modal-body" style="padding:40px 50px;">
                     <form role="form" class="form-login" method="post">
                         <div class="form-group">
+                            <div class="alert alert-info">
+                                <p>You can use the same credentials you used at raiwallet.com. Make sure you are logging in to https://nanowallet.io</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label for="wid">Wallet Identifier (Not email!) <a href="#" id="lost_id">Lost your identifier?</a></label>
                             <input type="text" name="wallet_id" id="wid" class="form-control" placeholder="e.g.: id_33f52770e537dbae2fe307bdc4ccd4de262c705e3b565f67b37754ad46f8525f" required />
                         </div>
