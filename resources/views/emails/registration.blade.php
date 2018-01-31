@@ -4,7 +4,7 @@
   <body>
     <div style="width:100%; height:100%; margin:0; padding:0">
       <h1>
-        Welcome to RaiWallet!
+        Welcome to NanoWallet.io!
       </h1>
       <p style="text-align:left">
         Thanks for registering with us. We hope you like our service and you find it useful to manage your
@@ -18,9 +18,9 @@
         In case you forget or lose your wallet identifier you can recover it with your email.
         You can also change that identifier with an alias (much more easier to remember).
         <br/><br/>
-        So yeah! If you need anything you can contact us at support@raiwallet.com.<br/><br/>
+        So yeah! If you need anything you can contact us at support@nanowallet.io.<br/><br/>
         Sincerely,<br/>
-        RaiWallet Team.
+        NanoWallet.io Team.
       </p>
     </div>
   </body>

@@ -4,7 +4,7 @@
   <body>
     <div style="width:100%; height:100%; margin:0; padding:0">
       <h1>
-        RaiWallet Recovery Email
+        NanoWallet Recovery Email
       </h1>
       <p style="text-align:left">
         You receive this email because you requested to recover your wallet identifier.<br/><br/>
@@ -16,9 +16,9 @@
         @endforeach
         
         <br/><br/>
-        So yeah! If you need anything you can contact us at support@raiwallet.com.<br/><br/>
+        So yeah! If you need anything you can contact us at support@nanowallet.io.<br/><br/>
         Sincerely,<br/>
-        RaiWallet Team.
+        NanoWallet.io Team.
       </p>
     </div>
   </body>

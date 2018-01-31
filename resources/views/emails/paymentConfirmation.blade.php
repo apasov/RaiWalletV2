@@ -30,9 +30,9 @@
         </p>
         <br/><br/>
         
-        If you need anything you can contact us at support@raiwallet.com.<br/><br/>
+        If you need anything you can contact us at support@nanowallet.io.<br/><br/>
         Sincerely,<br/>
-        RaiWallet Team.
+        NanoWallet.io Team.
       </p>
     </div>
   </body>
