@@ -11,7 +11,7 @@
 |
 */
 
-Route::domain('pay.raiwallet.com')->group(function () {
+Route::domain('pay.nanowallet.com')->group(function () {
     Route::get('/', 'PaymentsController@create');
     Route::post('/', 'PaymentsController@create');
     Route::group(['middleware' => 'auth'], function () {
