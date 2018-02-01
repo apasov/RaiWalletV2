@@ -10,8 +10,8 @@
                     <div class="col-sm-12">
                         <div class="row">
                             <div class="col-xs-8">
-                                <img src="img/raiwalletlogo.png" class="img-responsive pay-logo" />
-                                <h3 class="logo-name">RAIWALLET</h3>
+                                <img src="apple-icon.png" class="img-responsive pay-logo" />
+                                <h3 class="logo-name">NANOWALLET</h3>
                             </div>
                         </div>
                         <hr/>
