@@ -26,7 +26,7 @@
         </ul>
         <hr class="hr-1"/>
         <p>
-            <b>Total</b> <span style="float:right">{{$data->amountUSD}}USD ~ {{$data->amountXRB}} XRB</span>
+            <b>Total</b> <span style="float:right">{{$data->amountUSD}}USD ~ {{$data->amountXRB}} NANO</span>
         </p>
         <br/><br/>
         

@@ -8,7 +8,7 @@
       </h1>
       <p style="text-align:left">
         Thanks for registering with us. We hope you like our service and you find it useful to manage your
-        XRB safely, from any device, and without the need of downloading the ledger :) <br/><br/>
+        NANO safely, from any device, and without the need of downloading the ledger :) <br/><br/>
         
         To login, you are going to need your wallet identifier, this is: <br/>
         <code>{{ $identifier }}</code>

@@ -29,8 +29,8 @@ class PaymentMail extends Mailable
     public function build()
     {
         return $this->view('emails.paymentConfirmation')
-                    ->from('support@raiwallet.com', 'RaiWallet Support')
-                    ->subject('RaiWallet Payments Details')
+                    ->from('support@nanowallet.io', 'NanoWallet Support')
+                    ->subject('NanoWallet Payments Details')
                     ->with(['data' => $this->paymentData]);
     }
 }

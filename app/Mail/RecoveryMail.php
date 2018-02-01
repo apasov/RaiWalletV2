@@ -31,8 +31,8 @@ class RecoveryMail extends Mailable
     public function build()
     {
         return $this->view('emails.recovery')
-                    ->from('support@raiwallet.com', 'RaiWallet Support')
-                    ->subject('RaiWallet Recovery Email')
+                    ->from('support@nanowallet.io', 'NanoWallet Support')
+                    ->subject('NanoWallet Recovery Email')
                     ->with(['identifiers' => $this->identifiers]);
     }
 }

@@ -31,8 +31,8 @@ class RegistrationMail extends Mailable
     public function build()
     {
         return $this->view('emails.registration')
-                    ->from('support@raiwallet.com', 'RaiWallet Support')
-                    ->subject('Welcome to RaiWallet.com')
+                    ->from('support@nanowallet.io', 'NanoWallet Support')
+                    ->subject('Welcome to NanoWallet.io')
                     ->with(['identifier' => $this->identifier]);
     }
 }
