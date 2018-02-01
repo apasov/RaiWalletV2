@@ -10,8 +10,8 @@
                     <div class="col-sm-5">
                         <div class="row">
                             <div class="col-xs-8">
-                                <img src="img/raiwalletlogo.png" class="img-responsive pay-logo" />
-                                <h3 class="logo-name">RAIWALLET</h3>
+                                <img src="apple-icon.png" class="img-responsive pay-logo" />
+                                <h3 class="logo-name">NANOWALLET</h3>
                             </div>
                             <div class="col-xs-4">
                                 <p class="price">
@@ -39,7 +39,7 @@
                         </div>
                     </div>
                     <div class="col-sm-7 pay-form">
-                        <h3 id="pay-title">Pay with RaiWallet</h3>
+                        <h3 id="pay-title">Pay with NanoWallet</h3>
                         <form method="post" id="login-form">
                             <div class="form-group">
                                 <input type="text" id="identifier" name="identifier" class="form-control" placeholder="Alias or Identifier"  value="{{$user->identifier}}" />
@@ -56,7 +56,7 @@
                                 </button>
                             </div>
                             <div class="form-group">
-                                <input type="button" name="register" style="font-weight: 300" class="btn btn-default form-control" value="Or create a new wallet" onclick="location.href='https://raiwallet.com'" />
+                                <input type="button" name="register" style="font-weight: 300" class="btn btn-default form-control" value="Or create a new wallet" onclick="location.href='https://nanowallet.io'" />
                             </div>
                         </form>
                         <form method="post" id="pay-form" hidden>
