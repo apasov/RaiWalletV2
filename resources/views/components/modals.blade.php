@@ -263,6 +263,11 @@
                 <div class="modal-body" style="padding:25px">
                     <form role="form" class="form-receive">
                         <div class="form-group">
+                            <div class="alert alert-warning">
+                                <p>Before sending funds to this wallet, please be sure the <b>Wallet Seed</b> is correctly stored in a safe location. It can be found in Security > Wallet Seed.</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label for="wid">My Accounts</label>
                             <select name="from" id="receive-select" class="form-control" style="font-family:monospace">
             
