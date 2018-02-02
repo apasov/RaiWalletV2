@@ -31,7 +31,6 @@ var RAI_TO_RAW = "000000000000000000000000";
 var MILLION = 1000000;
 
 $(document).ready(function(){
-	
 	// alerts
 	function toast(title, msg)
 	{
@@ -898,7 +897,7 @@ $(document).ready(function(){
 	function goToWallet()
 	{
 		// load wallet template
-		$('.landing').html('<div class="transition-overlay"><span>NANOWALLET</span><br/><i class="fa fa-circle-o-notch fa-spin fa-fw"></i></div>');
+		$('.landing').html('<div class="transition-overlay"><span>NANOWALLET</span><br/><i class="fa fa-circle-o-notch fa-spin fa-fw"></i><br/> <div class="fade-in_10s" style="padding: 20px;"><p>It seems like loading your wallet is taking a while... If you are not using Chrome or Firefox, please try with these.</p></div> </div>');
 		$(".modal").modal('hide');
 
 		// load elements and display wallet

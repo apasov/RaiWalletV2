@@ -598,3 +598,65 @@ body {
 .body-pay{
   display:table;
 }
+
+.fade-in_10s {
+    -webkit-animation: FADE_IN 10s;
+    -moz-animation: FADE_IN 10s;
+    -o-animation: FADE_IN 10s;
+    animation: FADE_IN 10s;
+}
+@keyframes FADE_IN {
+    0% {
+        opacity: 0;
+    }
+    80% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+@-webkit-keyframes FADE_IN {
+    0% {
+        opacity: 0;
+    }
+    80% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+@-moz-keyframes FADE_IN {
+    0% {
+        opacity: 0;
+    }
+    80% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+@-o-keyframes FADE_IN {
+    0% {
+        opacity: 0;
+    }
+    80% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+@keyframes FADE_IN {
+    0% {
+        opacity: 0;
+    }
+    80% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
