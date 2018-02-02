@@ -266,7 +266,7 @@
             
                             </select>
                         </div>
-                        <p>Note that the amount below is only used to create the recieve QR code. Any amount of XRB sent to the selected address will be credited.</p>
+                        <p>Note that the amount below is only used to create the receive QR code. Any amount of XRB sent to the selected address will be credited.</p>
                         <div class="form-group">
                             <label for="amount">Amount (Nano)</label>
                             <input type="text" name="amount" id="receive-amount" class="form-control" placeholder="e.g.: 10.5" required />
