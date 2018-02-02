@@ -144,9 +144,11 @@
                     <h4><span class="glyphicon glyphicon-lock"></span> Wallet from Seed</h4>
                 </div>
                 <div class="modal-body importing" style="padding:40px 50px;">
-                    <p class="text-left">
-                        Please take into consideration that all prior wallet addresses generated from the seed will have to be regenerated manually once logged in.
-                    </p>
+                    <div class="form-group">
+                        <div class="alert alert-danger">
+                            <p>Please take into consideration that all prior wallet addresses generated from the seed will have to be <b>regenerated manually</b> once logged in.</p>
+                        </div>
+                    </div>
                     <form role="form" class="form-import" method="post">
                         <div class="form-group">
                             <label for="email">Email</label>
