@@ -176,10 +176,9 @@
                 <div class="row security" style="display:none">
                     <div class="col-md-12 b-line">
                         <div class="col-md-12">
-                            <h3>BackUps</h3>
+                            <h3>Wallet Seed</h3>
                             <p>
-                                If you haven't already, please, back up your seed. With it, you will be able to recover your funds in case you lose
-                                your password or your wallet data. 
+                                If you haven't already, please, back up your seed. With it, you will be able to recover your funds in case you lose your password or your wallet data. 
                             </p>
                             <form method="post">
                                 <div class="form-group">
