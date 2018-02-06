@@ -138,7 +138,7 @@ class WalletsController extends Controller
     {
         $wallet = Wallet::where('identifier', $request->identifier)->orWhere('alias', $request->identifier)->first();
         if(!$wallet)
-            return $this->error('Wallet not found.');
+            return $this->error('Wallet not found. Are you introducing the correct identifier? A common mistake is introducing the email.');
         
         if($wallet->legacy)
         {
