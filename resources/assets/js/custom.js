@@ -665,7 +665,7 @@ $(document).ready(function(){
 		$.post('/wallet/rebroadcast', 'hash='+blockHash, function(data){
 			if(data.status == 'success')
 			{
-				alertInfo('Block rebroadcated');
+				alertInfo('Block rebroadcasted');
 			}
 			else
 			{
