@@ -102,10 +102,12 @@
                     <div class="col-lg-8 col-lg-offset-2 text-center">
                         <i class="fa fa-envelope-o fa-3x sr-contact"></i>
                         <p style="overflow:hidden">
-                            <a href="mailto:support@nanowallet.io">support@nanowallet.io</a><br/> 
+                            <a href="mailto:support@nanowallet.io">support@nanowallet.io</a><br/> <br/> 
                             You are also invited to donate something :) <br/>
-                            xrb_1ma5dct7jdc8o45135xbr1bwbsixr47xugisu5fnwo69byhcno5u946smqfp 
+                            <span style="font-family:monospace;font-weight:bold;">xrb_1ma5dct7jdc8o45135xbr1bwbsixr47xugisu5fnwo69byhcno5u946smqfp </span>
                         </p>
+                        <a target="_blank" href="https://twitter.com/nanowallet_io"><i class="fa fa-twitter fa-3x" style="padding-right: 40px;"></i></a>
+                        <a target="_blank" href="https://medium.com/@nanowallet_io"><i class="fa fa-medium fa-3x"></i></a>
                     </div>
                 </div>
             </div>
