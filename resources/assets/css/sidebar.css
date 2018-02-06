@@ -151,6 +151,7 @@
     font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
     box-shadow:2px 2px 3px #888;
     margin-bottom:10px;
+    word-wrap: break-word;
 }
 .label-input{
     width:100%;
