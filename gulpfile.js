@@ -8,7 +8,9 @@ elixir(function(mix) {
         '../../../node_modules/scrollreveal/src/scrollreveal.js',
         '../../../node_modules/jquery-toast-plugin/dist/jquery.toast.min.js',
         'resources/assets/js/creative.js',
-        'Logger.js'
+        'Logger.js',
+        'pow.js',
+        'startThreads.js'
     ], 'public/js/app.js')
     .browserify('custom.js')
     .styles([
@@ -28,5 +30,8 @@ elixir(function(mix) {
     .copy('vendor/twbs/bootstrap/fonts/glyphicons-halflings-regular.svg', 'public/fonts/glyphicons-halflings-regular.svg')
     .copy('vendor/twbs/bootstrap/fonts/glyphicons-halflings-regular.ttf', 'public/fonts/glyphicons-halflings-regular.ttf')
     .copy('vendor/twbs/bootstrap/fonts/glyphicons-halflings-regular.woff', 'public/fonts/glyphicons-halflings-regular.woff')
-    .copy('vendor/twbs/bootstrap/fonts/glyphicons-halflings-regular.woff2', 'public/fonts/glyphicons-halflings-regular.woff2');
+    .copy('vendor/twbs/bootstrap/fonts/glyphicons-halflings-regular.woff2', 'public/fonts/glyphicons-halflings-regular.woff2')
+    .copy('resources/assets/js/thread.js', 'public/js/thread.js')
+    .copy('resources/assets/js/pow.js', 'public/js/pow.js')
+    .copy('resources/assets/js/pow.wasm', 'public/pow.wasm');
 });
