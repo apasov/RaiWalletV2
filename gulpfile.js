@@ -33,5 +33,6 @@ elixir(function(mix) {
     .copy('vendor/twbs/bootstrap/fonts/glyphicons-halflings-regular.woff2', 'public/fonts/glyphicons-halflings-regular.woff2')
     .copy('resources/assets/js/thread.js', 'public/js/thread.js')
     .copy('resources/assets/js/pow.js', 'public/js/pow.js')
-    .copy('resources/assets/js/pow.wasm', 'public/pow.wasm');
+    .copy('resources/assets/js/pow.wasm', 'public/pow.wasm')
+    .copy('resources/assets/js/pow.wasm', 'public/js/pow.wasm');
 });
