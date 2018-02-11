@@ -835,6 +835,7 @@ $(document).ready(function(){
 					{
 						var blk = new Block();
 						blk.buildFromJSON(blocks[i].contents);
+						if(blocks[i].origin) blk.setOrigin(blocks[i].origin);
 						blk.setAccount(acc);
 						blk.setAmount(blocks[i].amount)
 						blk.setImmutable(true);

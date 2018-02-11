@@ -297,7 +297,12 @@ class WalletsController extends Controller
                 $blocks2 = [];
                 foreach($blocks as $hash=>$data)
                 {
-                    $blk = array_merge(['hash' => $hash], $blocks[$hash]);
+                    $contents = json_decode($data['contents'], true);
+                    if($contents['type']=='open' || $contents['type']=='receive')
+                    {
+                          $data['origin'] = $node->block_account(['hash'=>$contents['source']])['account'];
+                    }
+                    $blk = array_merge(['hash' => $hash], $data);
                     $blocks2[] = $blk;
                 }
                 $res['accounts'][$account]['blocks'] = $blocks2;
