@@ -388,7 +388,7 @@ $(document).ready(function(){
 		var span = document.createElement('SPAN');
 		var txt = document.createTextNode(accountObj.account);
 		var link = document.createElement('a');
-		link.setAttribute('href','https://raiblocks.net/account/index.php?acc='+accountObj.account);
+		link.setAttribute('href','https://www.nanode.co/account/'+accountObj.account);
 		link.setAttribute('target','_blank');
 		link.appendChild(txt);
 		span.appendChild(link);
@@ -446,7 +446,7 @@ $(document).ready(function(){
 								'<div class="col-xs-3">'+
 									'<b class="green">Received</b>'+
 								'</div>'+
-								'<div class="col-xs-4"><a href="https://raiblocks.net/block/index.php?h='+txObj.hash+'" target="_blank">'+txObj.hash.substring(0,20)+'....</a></div>'+
+								'<div class="col-xs-4"><a href="https://www.nanode.co/block/'+txObj.hash+'" target="_blank">'+txObj.hash.substring(0,20)+'....</a></div>'+
 								'<div class="col-xs-5 text-right">'+
 									'<span class="green">'+(txObj.amount.over("1000000000000000000000000").toJSNumber() / 1000000).toFixed(8)+'</span> XRB'+
 								'</div>'+
@@ -1295,7 +1295,7 @@ $(document).ready(function(){
 							'<span class="'+color+' blk-amount">'+symbol+''+(block.getAmount().over("1000000000000000000000000").toJSNumber() / 1000000).toFixed(6)+'</span>'+
 						'</div>'+
 						'<div class="col-sm-6">'+
-							'<a href="https://raiblocks.net/block/index.php?h='+block.getHash(true)+'" target="_blank"><span class="blk-hash"> '+block.getHash(true)+'</span></a><br/>'+
+							'<a href="https://www.nanode.co/block/'+block.getHash(true)+'" target="_blank"><span class="blk-hash"> '+block.getHash(true)+'</span></a><br/>'+
 							'<b>'+fromto+'</b><span class="blk-account">'+account+'</span>'+
 						'</div>'+
 						'<div class="col-sm-4 text-center">'+
@@ -1319,7 +1319,7 @@ $(document).ready(function(){
 							'<span class="blk-type '+type+'">'+block.getType()+'</span>'+
 						'</div>'+
 						'<div class="col-sm-6">'+
-							'<a href="https://raiblocks.net/block/index.php?h='+block.getHash(true)+'" target="_blank"><span class="blk-hash"> '+block.getHash(true)+'</span></a><br/>'+
+							'<a href="https://www.nanode.co/block/'+block.getHash(true)+'" target="_blank"><span class="blk-hash"> '+block.getHash(true)+'</span></a><br/>'+
 							'<span class="blk-account">'+block.getRepresentative()+'</span>'+
 						'</div>'+
 						'<div class="col-sm-4 text-center">'+
@@ -1759,7 +1759,7 @@ $(document).ready(function(){
 				$('#pay-title').fadeOut(250);
 				$('#pay-form').fadeOut(250, function() {
 					$('#hash_link').html(blk.getHash(true));
-					$('#hash_link').attr('href', 'https://raiblocks.net/block/index.php?h='+blk.getHash(true));	
+					$('#hash_link').attr('href', 'https://www.nanode.co/block/'+blk.getHash(true));	
 					$('.pay-success').fadeIn();
 				});
 			}, 3000); // 3 seconds delay to make sure the block propagates through the network before the user having the link to the explorer
