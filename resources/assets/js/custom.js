@@ -551,14 +551,23 @@ $(document).ready(function(){
 			if(hash === false)
 				return setTimeout(clientPoW, 1000);
 			
-			pow_workers = pow_initiate(NaN, 'js/');
-			pow_callback(pow_workers, hash, function() {
-				logger.log('Working locally on ' + hash);
-			}, function(work) {
+			var finished = function(work) {
 				logger.log('PoW found for ' + hash + ": " + work);
 				wallet.updateWorkPool(hash, work);
 				setTimeout(clientPoW, 1000);
-			});
+			};
+
+			try {
+				NanoWebglPow(hash, finished);
+			} catch(error) {
+				if(error.message === 'webgl2_required') {
+					// Fallback to WebAssembly Proof of Work
+					pow_workers = pow_initiate(NaN, 'js/');
+					pow_callback(pow_workers, hash, function() {
+						logger.log('Working locally on ' + hash);
+					}, finished);
+				} else throw error;
+			}
 		}
 		else
 		{
