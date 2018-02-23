@@ -704,7 +704,7 @@ $(document).ready(function(){
 		var acc = account ? account : functions.parseXRBAccount($('#receive-select').val());
 		var am = $('#receive-amount').val();
 		if(acc)
-			$('#qr .img').html('<img style="height: 200px; margin-left: auto; margin-right: auto;" src="https://chart.googleapis.com/chart?chs=200x200&cht=qr&chl=raiblocks:'+acc+'?amount='+am+'">')
+			$('#qr .img').html('<img style="height: 200px; margin-left: auto; margin-right: auto;" src="https://chart.googleapis.com/chart?chs=200x200&cht=qr&chl=xrb:'+acc+'?amount='+am+'">')
 		$('.qr-bot').html('<code>'+acc+'</code>');
 		$('#qr').addClass('well');
 	}
