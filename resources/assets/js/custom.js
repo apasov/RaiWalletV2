@@ -557,7 +557,7 @@ $(document).ready(function(){
 				if(finished === null) return;
 
 				finished = null;        // In case of WebAssembly finishing first
-				pow_terminate(workers); // In case of WebGL finishing first
+				pow_terminate(pow_workers); // In case of WebGL finishing first
 
 				logger.log('PoW found for ' + hash + ": " + work);
 				wallet.updateWorkPool(hash, work);
