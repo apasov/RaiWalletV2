@@ -331,9 +331,9 @@ class WalletsController extends Controller
                 $blocks = [];
                 foreach($hashes as $hash)
                 {
-                    $block = $node->history(['hash' => $hash, 'count' => 1])['history'][0];
+                    $block = $node->blocks_info(['hashes' => [$hash]])['blocks'][$hash];
                     $amount = $block['amount'];
-                    $from = $block['account'];
+                    $from = $block['block_account'];
                     $blocks[] = ['amount' => $amount, 'from' => $from, 'hash' => $hash];
                 }
                 $res[$account]['account'] = $account;
