@@ -552,20 +552,31 @@ $(document).ready(function(){
 				return setTimeout(clientPoW, 1000);
 			
 			var finished = function(work) {
+				// Do not execute this callback again if WebGL returned before
+				// it was able to be stopped
+				if(finished === null) return;
+
+				finished = null;        // In case of WebAssembly finishing first
+				pow_terminate(workers); // In case of WebGL finishing first
+
 				logger.log('PoW found for ' + hash + ": " + work);
 				wallet.updateWorkPool(hash, work);
 				setTimeout(clientPoW, 1000);
 			};
 
+			pow_workers = pow_initiate(NaN, 'js/');
+			pow_callback(pow_workers, hash, function() {
+				logger.log('Working locally on ' + hash);
+			}, finished);
+
 			try {
-				NanoWebglPow(hash, finished);
+				NanoWebglPow(hash, finished, function(n) {
+					// If WebAssembly finished first, do not continue with WebGL
+					if(finished === null) return true;
+				});
 			} catch(error) {
 				if(error.message === 'webgl2_required') {
-					// Fallback to WebAssembly Proof of Work
-					pow_workers = pow_initiate(NaN, 'js/');
-					pow_callback(pow_workers, hash, function() {
-						logger.log('Working locally on ' + hash);
-					}, finished);
+					// Do nothing, WebAssembly is calculating as well
 				} else throw error;
 			}
 		}
