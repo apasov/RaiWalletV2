@@ -8,6 +8,7 @@ elixir(function(mix) {
         '../../../node_modules/scrollreveal/src/scrollreveal.js',
         '../../../node_modules/jquery-toast-plugin/dist/jquery.toast.min.js',
         'resources/assets/js/creative.js',
+        'resources/assets/js/nano-webgl-pow.js',
         'Logger.js',
         'pow.js',
         'startThreads.js'
