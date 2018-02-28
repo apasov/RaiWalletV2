@@ -951,10 +951,6 @@ $(document).ready(function(){
 				lastAction = Date.now() / 1000;
 			});
 			
-			const params = (new URL(location)).searchParams;
-			let encoded_address = params.get('encoded_address');
-			let amountMrai = params.get('amount') ? rawToMrai(params.get('amount')) : undefined;
-
 			window.history.pushState("home", "NanoWallet - Home", "/home");
 			document.title = 'NanoWallet - Home';
 
@@ -969,23 +965,6 @@ $(document).ready(function(){
 					$('.landing').remove();
 					$('.wallet-wrapper').fadeIn();
 				});
-
-				if (encoded_address || amountMrai) {
-					$("#send-modal").on('shown.bs.modal', function (e) {
-						if (encoded_address && functions.parseXRBAccount(encoded_address)) {
-							$("#to").val(encoded_address);
-						}
-						if (amountMrai && isFinite(amountMrai)) {
-							$("#samount").val(amountMrai);
-						}
-						// Remove the event
-						$("#send-modal").off('shown.bs.modal');
-						// Set to undefined, incase this method is called again
-						amountMrai = undefined;
-						encoded_address = undefined;
-					});
-					$("#send-modal").modal();
-				}
 			}, 1000);
 		});
 	}
