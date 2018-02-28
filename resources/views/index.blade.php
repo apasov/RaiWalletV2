@@ -73,7 +73,7 @@
                         <div class="service-box">
                             <i class="fa fa-4x fa-globe text-primary sr-icons"></i>
                             <h3>Use it anywhere</h3>
-                            <p class="text-muted">At home, in the street, on the mobile or computer... make XRB transactions where you need to!</p>
+                            <p class="text-muted">At home, in the street, on the mobile or computer... make NANO transactions where you need to!</p>
                         </div>
                     </div>
                 </div>

@@ -408,8 +408,8 @@ $(document).ready(function(){
 		});
 		
 		
-		$('#send-select').append('<option class="acc_select_'+accountObj.account+'">'+label_txt2+accountObj.account+' ('+(accountObj.balance / 1000000).toFixed(6)+' XRB)</option>');
-		$('#receive-select').append('<option class="acc_select_'+accountObj.account+'">'+label_txt2+accountObj.account+' ('+(accountObj.balance / 1000000).toFixed(6)+' XRB)</option>');
+		$('#send-select').append('<option class="acc_select_'+accountObj.account+'">'+label_txt2+accountObj.account+' ('+(accountObj.balance / 1000000).toFixed(6)+' NANO)</option>');
+		$('#receive-select').append('<option class="acc_select_'+accountObj.account+'">'+label_txt2+accountObj.account+' ('+(accountObj.balance / 1000000).toFixed(6)+' NANO)</option>');
 		$('#change-select').append('<option>'+label_txt2+accountObj.account+'</option>');
 		$('#acc-select').append('<option>'+label_txt2+accountObj.account+'</option>');
 	}
@@ -448,7 +448,7 @@ $(document).ready(function(){
 								'</div>'+
 								'<div class="col-xs-4"><a href="https://www.nanode.co/block/'+txObj.hash+'" target="_blank">'+txObj.hash.substring(0,20)+'....</a></div>'+
 								'<div class="col-xs-5 text-right">'+
-									'<span class="green">'+(txObj.amount.over("1000000000000000000000000").toJSNumber() / 1000000).toFixed(8)+'</span> XRB'+
+									'<span class="green">'+(txObj.amount.over("1000000000000000000000000").toJSNumber() / 1000000).toFixed(8)+'</span> NANO'+
 								'</div>'+
 							'</div></li></ul>');
 	}
@@ -473,7 +473,7 @@ $(document).ready(function(){
 								'</div>'+
 								'<div class="col-xs-3">'+txObj.date+'</div>'+
 								'<div class="col-xs-6 text-right">'+
-									'<span class="red">'+(txObj.amount.over("1000000000000000000000000").toJSNumber() / 1000000).toFixed(8)+'</span> XRB'+
+									'<span class="red">'+(txObj.amount.over("1000000000000000000000000").toJSNumber() / 1000000).toFixed(8)+'</span> NANO'+
 								'</div>'+
 							'</div></li></ul>');
 	}
@@ -512,9 +512,9 @@ $(document).ready(function(){
 			var bal = accs[i].balance;
 			var label = accs[i].label;
 			if(label == "")
-				$('select').find('.acc_select_'+acc).html(acc+' ('+(bal.over("1000000000000000000000000").toJSNumber() / 1000000).toFixed(6)+' XRB)');
+				$('select').find('.acc_select_'+acc).html(acc+' ('+(bal.over("1000000000000000000000000").toJSNumber() / 1000000).toFixed(6)+' NANO)');
 			else
-				$('select').find('.acc_select_'+acc).html('('+label+') - '+acc+' ('+(bal.over("1000000000000000000000000").toJSNumber() / 1000000).toFixed(6)+' XRB)');
+				$('select').find('.acc_select_'+acc).html('('+label+') - '+acc+' ('+(bal.over("1000000000000000000000000").toJSNumber() / 1000000).toFixed(6)+' NANO)');
 		}
 	}
 	
@@ -1178,7 +1178,7 @@ $(document).ready(function(){
 		try{
 			functions.keyFromAccount(to);
 		}catch(e){
-			alertError('Invalid XRB address.');
+			alertError('Invalid NANO address.');
 			$('#to').css('border-color', '#880000');
 			error = true;
 		}
@@ -1640,9 +1640,9 @@ $(document).ready(function(){
 	function addAccountToPaySelect(account)
 	{
 		if(account.label)
-			$('.pay-account-select').append('<option value="'+account.account+'"> '+(account.balance.over("1000000000000000000000000").toJSNumber() / 1000000).toFixed(6)+' XRB - '+account.label+' ('+account.account+')</option>');
+			$('.pay-account-select').append('<option value="'+account.account+'"> '+(account.balance.over("1000000000000000000000000").toJSNumber() / 1000000).toFixed(6)+' NANO - '+account.label+' ('+account.account+')</option>');
 		else
-			$('.pay-account-select').append('<option value="'+account.account+'"> '+(account.balance.over("1000000000000000000000000").toJSNumber() / 1000000).toFixed(6)+' XRB - '+account.account+'</option>');
+			$('.pay-account-select').append('<option value="'+account.account+'"> '+(account.balance.over("1000000000000000000000000").toJSNumber() / 1000000).toFixed(6)+' NANO - '+account.account+'</option>');
 	}
 
 	function signInAndPay()

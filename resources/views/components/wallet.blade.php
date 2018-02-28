@@ -45,7 +45,7 @@
                                     <button type="button" class="btn btn-primary" id="change">Change</button>
                                 </div>
                                 <div class="col-xs-6 text-right" id="refresh">
-                                    <h2><span id="balance">0</span> XRB</h2>
+                                    <h2><span id="balance">0</span> NANO</h2>
                                     <h4>(<span id="pending">0</span> pending)</h4>
                                 </div>
                             </div>
