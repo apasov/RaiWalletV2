@@ -569,7 +569,31 @@ class WalletsController extends Controller
             return $this->error('Error broadcasting block. Node may be shut down.');
             
         // TODO: broadcast the block from multiple nodes
-        
+        $redundant_nodes = explode('|', env('REDUNDANT_NODES'));
+        if(count($redundant_nodes) > 0)
+        {
+            foreach($redundant_nodes as $n)
+            {
+                if(strpos($n, ':') !== false)
+                {
+                    $explode = explode(':', $n);
+                    $ip = $explode[0];
+                    $port = $explode[1];
+                }
+                else
+                {
+                    $ip = $n;
+                    $port = 7076; // default nano rpc port
+                }
+
+                if (filter_var($ip, FILTER_VALIDATE_IP))
+                {
+                    $node_2 = new RaiNode($ip, $port);
+                    $node_2->process(['block' => $request->data]);
+                }
+            }
+        }
+
         return $this->success();
     }
     
