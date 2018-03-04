@@ -1094,33 +1094,7 @@ $(document).ready(function(){
 					signOutInterval = data.sign_out;
 					$('#aso_time').val(signOutInterval);
 					
-					// notify server about successful decryption to allow accessing authenticated methods
-					var syncwallet = 0;
-					if(!wallet.getLoginKey())
-					{
-						// login key hasnt been generated yet
-						wallet.setLoginKey();
-						syncwallet = wallet.pack();
-					}
 					imLoggedIn(goToWallet);
-					/*
-					$.post('/wallet/imLoggedIn', 'loginKey='+wallet.getLoginKey()+'&identifier='+identifier+'&wallet='+syncwallet, function(data2) {
-						if(data2.status == 'success')
-						{
-							if(data2._2fa_enabled)
-							{
-								_2fa_enabled = true;
-								_2fa_confirmed = true;
-							}
-							goToWallet();
-						}
-						else
-						{
-							alertError(data.msg);
-							console.error(data.msg);
-						}
-					});
-					*/
 				}
 			}
 			else
