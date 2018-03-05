@@ -322,23 +322,25 @@ class WalletsController extends Controller
         $node = new RaiNode();
         $pending = $node->accounts_pending(['accounts' => $accounts, 'count' => 10])['blocks'];
         $res = [];
-        foreach($pending as $account => $hashes)
+        if(is_array($pending) && count($pending) > 0)
         {
-            if(is_array($hashes) && count($hashes) > 0)
+            foreach($pending as $account => $hashes)
             {
-                $blocks = [];
-                foreach($hashes as $hash)
+                if(is_array($hashes) && count($hashes) > 0)
                 {
-                    $block = $node->blocks_info(['hashes' => [$hash]])['blocks'][$hash];
-                    $amount = $block['amount'];
-                    $from = $block['block_account'];
-                    $blocks[] = ['amount' => $amount, 'from' => $from, 'hash' => $hash];
+                    $blocks = [];
+                    foreach($hashes as $hash)
+                    {
+                        $block = $node->blocks_info(['hashes' => [$hash]])['blocks'][$hash];
+                        $amount = $block['amount'];
+                        $from = $block['block_account'];
+                        $blocks[] = ['amount' => $amount, 'from' => $from, 'hash' => $hash];
+                    }
+                    $res[$account]['account'] = $account;
+                    $res[$account]['blocks'] = $blocks;
                 }
-                $res[$account]['account'] = $account;
-                $res[$account]['blocks'] = $blocks;
             }
         }
-        
         return $this->success(['res' => $res]);            
     }
     
